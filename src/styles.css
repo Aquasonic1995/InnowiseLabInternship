@@ -1,4 +1,10 @@
-body {
+* {
+    box-sizing: border-box;
+}
+
+body {font-family:"arial";
+    font-size: 26px;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,9 +12,71 @@ body {
     height: 100vh;
     margin: 0;
 }
+.calculator {position: relative;
+    border-radius: 30px;
+    background: #7D7D7D;
+    width: 286px;
+    height: 400px;
+    overflow: hidden;
+}
+.display { border: none;
 
-input, button, p {
+background: #535353;
+    padding: 0;
+    height: 100px;
     width: 100%;
-    max-width: 300px;
-    margin-bottom: 10px;
+}
+
+body.purple-theme .display{
+    background: #161C2D;
+}
+.dark-grey{
+    background: #646464;
+}
+
+.keyboard{flex-wrap: wrap;
+    height: 300px;
+    display: flex;
+}
+.button { display: inline-block;
+    line-height: 57px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid grey;
+    width: 71px;
+
+}
+
+.orange{
+    background: #FF9F0A;
+}
+.zero{
+    width: 142px;
+}
+.styles{
+    left :20px;
+    top: 10px;
+    position: absolute;
+    width: 100px;
+    height: 15px;
+    display: flex;
+    gap: 10px;
+}
+.orange-style{width: 15px;
+    border-radius: 50px;
+    height: 15px;
+    background: darkorange;
+}
+.purple-style{width: 15px;
+    height: 15px;
+    background: purple;
+    border-radius: 50px;
+
+}
+.neon-style{
+    border-radius: 50px;
+
+    width: 15px;
+    height: 15px;
+    background: black;
 }

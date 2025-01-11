@@ -1,8 +1,24 @@
-function addNumbers() {
-  const num1 = parseFloat(document.getElementById('number1').value)
-  const num2 = parseFloat(document.getElementById('number2').value);
-  const result = num1 + num2;
-  document.getElementById('result').innerText = `Result: ${result}`;
+require('./styles.css');
+if (module.hot) {
+  module.hot.accept(); // Accept updates for hot-reloaded modules
 }
+const body = document.body;
 
-document.getElementById('calculate').addEventListener('click', addNumbers);
+const orangeButton = document.getElementById('orangeButton');
+const purpleButton = document.getElementById('purpleButton');
+const neonButton = document.getElementById('neonButton');
+
+// Event listener for Light Theme button
+orangeButton.addEventListener('click', () => {
+  body.className = 'orange-theme';
+});
+
+// Event listener for Dark Theme button
+purpleButton.addEventListener('click', () => {
+  body.className = 'purple-theme';
+});
+
+// Event listener for Custom Theme button
+neonButton.addEventListener('click', () => {
+  body.className = 'neon-theme';
+});

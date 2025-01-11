@@ -13,6 +13,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/, // Add this rule
+        use: ["html-loader"], // Use html-loader for .html files
+      },
+      {
         test: /\.css$/, // Регулярное выражение для обработки файлов с расширением .css
         use: ["style-loader", "css-loader"], // Загрузчики, используемые для обработки CSS-файлов
       },
@@ -22,6 +26,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      inject: "body",
     }),
   ],
 
@@ -29,7 +34,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "dist"), // Каталог для статики
     },
-    open: true, // Автоматически открывать браузер
+    hot: true,
+    open: true,
+    watchFiles: ["src/**/*.html"],
   },
 
   mode: "development", // Режим сборки

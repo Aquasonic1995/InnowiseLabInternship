@@ -7,6 +7,7 @@ import prettierConfig from "eslint-config-prettier";
 /** @type {import('eslint').Linter.Config[]} */
 import "eslint-plugin-only-warn";
 export default [
+
   {
     files: ["**/*.js"], // Apply to all .js files
     languageOptions: {
@@ -28,6 +29,7 @@ export default [
       ],
 
     },
+
   },
   pluginJs.configs.recommended, // Use recommended rules from @eslint/js
 ];

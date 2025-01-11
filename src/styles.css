@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {font-family:"arial";
@@ -11,47 +13,81 @@ body {font-family:"arial";
     justify-content: center;
     height: 100vh;
     margin: 0;
+    user-select: none;
 }
 .calculator {position: relative;
-    border-radius: 30px;
+    border-radius: 20px;
     background: #7D7D7D;
     width: 286px;
     height: 400px;
     overflow: hidden;
-}
-.display { border: none;
+    border: 1px solid #535353;
+        box-shadow: 0 0 50px #535353;
 
-background: #535353;
-    padding: 0;
-    height: 100px;
-    width: 100%;
 }
+body.purple-theme .calculator{
+    background: #325180;
+    box-shadow: 0 0 50px  #325180;
+}
+body.color-theme .calculator{
+    background: #7EC3B0;
+    box-shadow: 0 0 50px   #41B3A3;
+}
+.button { display: inline-block;
+    line-height: 57px;
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #535353;
+    width: 71px;
 
-body.purple-theme .display{
-    background: #161C2D;
 }
-.dark-grey{
-    background: #646464;
+.button:active{
+    background: green;
+    transform: translateY(2px);
+    border: none;
 }
 
 .keyboard{flex-wrap: wrap;
     height: 300px;
     display: flex;
 }
-.button { display: inline-block;
-    line-height: 57px;
-    vertical-align: middle;
-    text-align: center;
-    border: 1px solid grey;
-    width: 71px;
 
+.display { border: none;
+background: #535353;
+    padding: 0;
+    height: 100px;
+    width: 100%;
 }
-
-.orange{
+body.purple-theme .display{
+    background: #161C2D;
+}
+body.color-theme .display{
+    background: #85CCC9;
+}
+body.purple-theme .top-button{
+    background: #202940;
+}
+body.color-theme .top-button{
+    background: #41B3A3;
+}
+.right-button{
     background: #FF9F0A;
 }
+
+body.purple-theme .right-button{
+     background: #CE93D8;
+ }
+
+body.color-theme .right-button{
+    background: #E27C5F;
+}
+
+
+
+
 .zero{
     width: 142px;
+    margin-bottom: 1px;
 }
 .styles{
     left :20px;
@@ -69,14 +105,13 @@ body.purple-theme .display{
 }
 .purple-style{width: 15px;
     height: 15px;
-    background: purple;
+    background: #C48D9D;
     border-radius: 50px;
 
 }
-.neon-style{
+.color-style{
     border-radius: 50px;
-
     width: 15px;
     height: 15px;
-    background: black;
+    background:#E8A97C;
 }

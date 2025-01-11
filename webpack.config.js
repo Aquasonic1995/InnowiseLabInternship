@@ -13,9 +13,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/, // Add this rule
-        use: ["html-loader"], // Use html-loader for .html files
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader", // Transpile ES6+ to ES5
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
+
       {
         test: /\.css$/, // Регулярное выражение для обработки файлов с расширением .css
         use: ["style-loader", "css-loader"], // Загрузчики, используемые для обработки CSS-файлов

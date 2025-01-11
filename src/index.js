@@ -1,4 +1,4 @@
-require('./styles.css');
+require('styles.css');
 if (module.hot) {
   module.hot.accept(); // Accept updates for hot-reloaded modules
 }
@@ -6,7 +6,7 @@ const body = document.body;
 
 const orangeButton = document.getElementById('orangeButton');
 const purpleButton = document.getElementById('purpleButton');
-const neonButton = document.getElementById('neonButton');
+const colorButton = document.getElementById('colorButton');
 
 // Event listener for Light Theme button
 orangeButton.addEventListener('click', () => {
@@ -19,6 +19,6 @@ purpleButton.addEventListener('click', () => {
 });
 
 // Event listener for Custom Theme button
-neonButton.addEventListener('click', () => {
-  body.className = 'neon-theme';
+colorButton.addEventListener('click', () => {
+  body.className = 'color-theme';
 });

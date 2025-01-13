@@ -5,6 +5,8 @@ if (module.hot) {
 const body = document.body;
 const display = document.getElementById('display');
 const clear = document.getElementById('clear');
+const comma = document.getElementById('comma');
+const memory = document.getElementById('memory');
 const orangeButton = document.getElementById('orangeButton');
 const purpleButton = document.getElementById('purpleButton');
 const colorButton = document.getElementById('colorButton');
@@ -16,7 +18,8 @@ const percent = document.getElementById('percent');
 let currentOperator = null;
 let previousValue = null;
 let isOperation = false;
-// Event listener for Light Theme button
+let isResulted = false;
+
 orangeButton.addEventListener('click', () => {
   body.className = 'orange-theme';
 });
@@ -33,10 +36,15 @@ colorButton.addEventListener('click', () => {
 
 digits.forEach((digit) => {
   digit.addEventListener('click', () => {
+    if (isResulted === true) {
+      isResulted = false;
+      display.value = '';
+    }
     if (isOperation === true) {
       isOperation = false;
       display.value = '';
     }
+
     const value = digit.textContent; // Get the value from the button
     addToDisplay(value); // Call addToDisplay with the button's value
   });
@@ -44,10 +52,12 @@ digits.forEach((digit) => {
 
 function addToDisplay(input) {
   if (display.value.length < 8) {
-    // Check if the current input length is less than 7
-    display.value += input; // Append the input to the display
+    if (display.value.endsWith('.0')) {
+      display.value = display.value.slice(0, -1) + input; // Remove only the last zero
+    } else {
+      display.value += input; // Append the input to the display
+    }
   }
-  console.log(display.value);
 }
 
 clear.addEventListener('click', () => {
@@ -70,10 +80,10 @@ operators.forEach((operator) => {
       currentOperator = null;
       previousValue = null;
     }
-
     if (previousValue === null) {
       // Store the current display value and operator if no operation is pending
       previousValue = parseFloat(display.value);
+      memory.textContent = `${previousValue} ${operatorValue}`;
       currentOperator = operatorValue;
       isOperation = true;
     } else if (currentOperator) {
@@ -82,6 +92,7 @@ operators.forEach((operator) => {
       display.value = result; // Show the result
       previousValue = result; // Update the previous value for chaining operations
       currentOperator = operatorValue; // Update to the new operator
+      memory.textContent = previousValue; // Update memory display
     }
   });
 });
@@ -132,10 +143,12 @@ result.addEventListener('click', () => {
     const currentValue = parseFloat(display.value);
     const resultValue = performOperation(previousValue, currentValue, currentOperator);
     display.value = resultValue; // Update the display with the result
-
+    isResulted = true;
+    // Update memory display
     // Reset operator and previous value for a fresh start
     currentOperator = null;
     previousValue = null;
+    memory.textContent = previousValue;
   }
 });
 
@@ -155,6 +168,12 @@ percent.addEventListener('click', () => {
     const currentValue = parseFloat(display.value);
     console.log(currentValue);
     display.value = currentValue / 100;
+  }
+});
+comma.addEventListener('click', () => {
+  // Ensure only one decimal point per number
+  if (!display.value.includes('.')) {
+    addToDisplay('.0'); // Append a dot (.) to the display value
   }
 });
 

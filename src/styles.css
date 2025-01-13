@@ -25,6 +25,14 @@ body {font-family:"arial";
         box-shadow: 0 0 50px #535353;
 
 }
+.memory{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    color: white;
+    font-size: 20px;
+}
 body.purple-theme .calculator{
     background: #325180;
     box-shadow: 0 0 50px  #325180;

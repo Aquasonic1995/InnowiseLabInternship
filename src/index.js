@@ -1,4 +1,5 @@
 require('./styles.css');
+require('js/calculatorLogic.js');
 if (module.hot) {
   module.hot.accept(); // Accept updates for hot-reloaded modules
 }
@@ -149,6 +150,7 @@ result.addEventListener('click', () => {
     currentOperator = null;
     previousValue = null;
     memory.textContent = previousValue;
+    console.log('click');
   }
 });
 
@@ -182,3 +184,49 @@ function clearDisplay() {
   currentOperator = null; // Reset operator
   previousValue = null; // Reset previous value
 }
+document.addEventListener('keydown', (event) => {
+  if (isResulted === true) {
+    isResulted = false;
+    display.value = '';
+  }
+  if (isOperation === true) {
+    isOperation = false;
+    display.value = '';
+  }
+
+  const key = event.key; // Get the key pressed
+
+  if (key >= '0' && key <= '9') {
+    // If it's a number, add it to the display
+    addToDisplay(key);
+  } else if (key === '.' || key === ',') {
+    // If it's a comma or dot, handle decimal point logic
+    if (!display.value.includes('.')) {
+      addToDisplay('.0'); // Append a dot (.) to the display value
+    }
+  } else if (['+', '-', '*', '/'].includes(key)) {
+    // If it's an operator, handle the operator logic
+    if (isOperation === true) {
+      isOperation = false;
+      currentOperator = null;
+      previousValue = null;
+    }
+    if (previousValue === null) {
+      // Store the current display value and operator if no operation is pending
+      previousValue = parseFloat(display.value);
+      memory.textContent = `${previousValue} ${key}`;
+      currentOperator = key;
+      isOperation = true;
+    } else if (currentOperator) {
+      // Perform the operation if one is already pending
+      const result = performOperation(previousValue, parseFloat(display.value), currentOperator);
+      display.value = result; // Show the result
+      previousValue = result; // Update the previous value for chaining operations
+      currentOperator = key; // Update to the new operator
+      memory.textContent = previousValue; // Update memory display
+    }
+  } else if (key === 'Enter' || key === '=') {
+    // If it's equal (Enter), perform the calculation
+    result.click();
+  }
+});

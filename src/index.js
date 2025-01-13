@@ -1,5 +1,4 @@
 require('./styles.css');
-require('js/calculatorLogic.js');
 if (module.hot) {
   module.hot.accept(); // Accept updates for hot-reloaded modules
 }
@@ -88,12 +87,14 @@ operators.forEach((operator) => {
       currentOperator = operatorValue;
       isOperation = true;
     } else if (currentOperator) {
+      console.log('!!!!!');
       // Perform the operation if one is already pending
       const result = performOperation(previousValue, parseFloat(display.value), currentOperator);
+      isResulted = true;
       display.value = result; // Show the result
       previousValue = result; // Update the previous value for chaining operations
       currentOperator = operatorValue; // Update to the new operator
-      memory.textContent = previousValue; // Update memory display
+      memory.textContent = `${previousValue} ${operatorValue}`; // Update memory display
     }
   });
 });
@@ -143,6 +144,7 @@ result.addEventListener('click', () => {
     // Perform the operation with the stored values
     const currentValue = parseFloat(display.value);
     const resultValue = performOperation(previousValue, currentValue, currentOperator);
+
     display.value = resultValue; // Update the display with the result
     isResulted = true;
     // Update memory display
@@ -221,9 +223,10 @@ document.addEventListener('keydown', (event) => {
       // Perform the operation if one is already pending
       const result = performOperation(previousValue, parseFloat(display.value), currentOperator);
       display.value = result; // Show the result
+      isResulted = true;
       previousValue = result; // Update the previous value for chaining operations
       currentOperator = key; // Update to the new operator
-      memory.textContent = previousValue; // Update memory display
+      memory.textContent = `${previousValue} ${key}`; // Update memory display
     }
   } else if (key === 'Enter' || key === '=') {
     // If it's equal (Enter), perform the calculation
